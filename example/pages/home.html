@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <base href="{{base}}" />
+  <script type="text/javascript">
+    "{{init}}"
+  </script>
+  <link href="shared/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="shared/style.css" rel="stylesheet" />
+  <script src="shared/jquery/jquery-3.4.1.slim.min.js"></script>
+  <script src="shared/popper.js/popper.min.js"></script>
+  <script src="shared/bootstrap/js/bootstrap.min.js"></script>
+  <title>Sample Page</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bd-navbar">
+    <h1 class="navbar-brand">
+      Sample Page: This is a page created by vscode-page.
+    </h1>
+    <ul class="navbar-nav ml-md-auto">
+      <li class="nav-item">
+        <a class="nav-link p-2" href="" target="_blank" rel="noopener" aria-label="GitHub">
+          <img src="shared/imgs/github.png" />
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link p-2" href="" target="_blank" rel="noopener" aria-label="GitHub">
+          <img src="shared/imgs/twitter.png" />
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link p-2" href="" target="_blank" rel="noopener" aria-label="GitHub">
+          <img src="shared/imgs/contact.png" />
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container-fluid" style="margin-top:63px;">
+    <div class="row  flex-xl-nowrap">
+      <div class="col-md-3 col-xl-2 bd-sidebar no-padding">
+        <div class="bd-search d-flex py-md-3 pb-md-3">
+          <button type="button" class="btn btn-secondary" id="settingBtn" onclick="loadRepositories()">
+            Setting
+          </button>
+        </div>
+        <ul id="repos" class="py-md-3 sidebar-sticky"></ul>
+      </div>
+      <main class="col-md-9 col-xl-10 py-md-3 pl-md-4 pr-md-4 bd-content">
+        <h2 id="title"></h2>
+        <hr />
+        <div id="content"></div>
+      </main>
+    </div>
+  </div>
+  <script type="text/javascript">
+    initEventListener();
+
+    const vscode = acquireVsCodeApi();
+    init();
+
+    function listExtensions(repo) {
+      vscode.postMessage({
+        command: "listExtensions",
+        parameters: {
+          repo: repo
+        }
+      });
+    }
+
+    function showExtension(repo, extId, installed) {
+      vscode.postMessage({
+        command: "showExtension",
+        parameters: {
+          repo: repo,
+          extId: extId,
+          installed: installed
+        }
+      });
+    }
+
+    function installExtension(repo, extId) {
+      vscode.postMessage({
+        command: "installExtension",
+        parameters: {
+          repo: repo,
+          extId: extId
+        }
+      });
+    }
+
+    function loadRepositories() {
+      vscode.postMessage({
+        command: "loadRepositories"
+      });
+    }
+
+    function submitRepositories() {
+      if ($("#setting-textarea").val()) {
+        vscode.postMessage({
+          command: "submitRepositories",
+          parameters: {
+            repositories: JSON.parse($("#setting-textarea").val())
+          }
+        });
+      }
+    }
+
+    function openExtension(extId) {
+      vscode.postMessage({
+        command: "openExtension",
+        parameters: {
+          extId: extId
+        }
+      });
+    }
+
+    function init() {
+      vscode.postMessage({
+        command: "ready"
+      });
+    }
+
+    function cancelSetting() {
+      init();
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+{
+  "name": "vscode-page",
+  "author": "dteam",
+  "version": "0.0.1",
+  "description": "A light-weight page micro framework for vscode webview.",
+  "license": "Apache-2.0",
+  "tags": [
+    "functions",
+    "classes",
+    "typescript",
+    "tools",
+    "helpers",
+    "vscode"
+  ],
+  "keywords": [
+    "functions",
+    "classes",
+    "js",
+    "ecmascript",
+    "javascript",
+    "typescript",
+    "tools",
+    "helpers",
+    "vscode",
+    "visual",
+    "studio",
+    "code",
+    "extensions",
+    "modules"
+  ],
+  "engines": {
+    "vscode": "^1.42.0"
+  },
+  "main": "lib/pages.js",
+  "typings": "lib/pages.d.ts",
+  "scripts": {
+    "prepare": "rm -rf lib && tsc && tsc -d",
+    "prepublishOnly": "npm run compile && npm run lint",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "mocha out/test/**/*.test.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^7.0.1",
+    "@types/vscode": "^1.42.0",
+    "@types/node": "^12.11.7",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
+    "eslint": "^6.8.0",
+    "mocha": "^7.0.1",
+    "typescript": "^3.7.5",
+    "handlebars": "^4.7.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DTeam-Top/vscode-page.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DTeam-Top/vscode-page/issues"
+  },
+  "homepage": "https://github.com/DTeam-Top/vscode-page/blob/master/README.md"
+}
