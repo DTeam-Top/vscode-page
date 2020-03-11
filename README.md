@@ -1,5 +1,7 @@
 # vscode-page
 
+[![NPM](https://nodei.co/npm/vscode-page.png?compact=true)](https://nodei.co/npm/vscode-page/)
+
 vscode-page is a light-weight page micro framework for vscode webview. Vs Code Extension developers can use it to finish pages for webviews in their extensions quickly.
 
 ## Features
