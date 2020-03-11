@@ -1,14 +1,14 @@
-import * as vscode from "vscode";
-import * as fs from "fs";
-import * as path from "path";
-import * as handlebars from "handlebars";
+import * as vscode from 'vscode';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as handlebars from 'handlebars';
 
 export type MessageHandler = (parameters?: any) => Promise<any>;
-export type Template = {
+export interface Template {
   id: string;
   content?: string;
   contentUrl?: string;
-};
+}
 export interface MesssageMaping {
   command: string;
   handler: MessageHandler;
@@ -16,7 +16,10 @@ export interface MesssageMaping {
   forward?: string;
 }
 
-type Content = { id: string; body: string };
+interface Content {
+  id: string;
+  body: string;
+}
 interface CommandResponse {
   command: string;
   contents?: Content[];
@@ -56,10 +59,12 @@ export function createOrShowPage(
   if (panel) {
     panel.reveal();
   } else {
-    let rootString = path.join(context.extensionPath, base);
-    let localResourceRoots = vscode.Uri.file(path.join(rootString, "/")).with({
-      scheme: "vscode-resource"
-    });
+    const rootString = path.join(context.extensionPath, base);
+    const localResourceRoots = vscode.Uri.file(path.join(rootString, '/')).with(
+      {
+        scheme: 'vscode-resource',
+      }
+    );
     panel = vscode.window.createWebviewPanel(
       viewType,
       title,
@@ -67,14 +72,14 @@ export function createOrShowPage(
       {
         enableScripts: true,
         retainContextWhenHidden: true,
-        localResourceRoots: [localResourceRoots]
+        localResourceRoots: [localResourceRoots],
       }
     );
 
     const pagePath = path.join(rootString, page);
     panel.webview.html = fs
-      .readFileSync(pagePath, "utf-8")
-      .replace("{{base}}", localResourceRoots.toString())
+      .readFileSync(pagePath, 'utf-8')
+      .replace('{{base}}', localResourceRoots.toString())
       .replace('"{{init}}"', initJS);
     panel.webview.onDidReceiveMessage(
       createDispatch(messageMappings, panel, context)
@@ -93,12 +98,14 @@ function createDispatch(
   currentPanel: vscode.WebviewPanel,
   context: vscode.ExtensionContext
 ) {
-  let handler = (message: any) => {
+  const handler = (message: any) => {
     const mapping = messageMappings.find(
       mapping => mapping.command === message.command
     );
     if (mapping) {
-      let response: CommandResponse = { command: `${message.command}Response` };
+      const response: CommandResponse = {
+        command: `${message.command}Response`,
+      };
       mapping.handler.call(null, message.parameters).then(result => {
         if (mapping.templates) {
           response.contents = [];
@@ -106,7 +113,7 @@ function createDispatch(
             if (template.content) {
               response.contents?.push({
                 id: template.id,
-                body: handlebars.compile(template.content)(result)
+                body: handlebars.compile(template.content)(result),
               });
             } else if (template.contentUrl) {
               response.contents?.push({
@@ -117,14 +124,14 @@ function createDispatch(
                       path.join(context.extensionPath, template.contentUrl)
                     )
                     .toString()
-                )(result)
+                )(result),
               });
             }
           });
         } else if (mapping.forward) {
           return handler.call(null, {
             command: mapping.forward,
-            parameters: result
+            parameters: result,
           });
         } else {
           response.result = result;

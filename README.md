@@ -1,5 +1,7 @@
 # vscode-page
 
+[![Code Style: Google](https://img.shields.io/badge/code%20style-google-blueviolet.svg)](https://github.com/google/gts)
+
 [![NPM](https://nodei.co/npm/vscode-page.png?compact=true)](https://nodei.co/npm/vscode-page/)
 
 vscode-page is a light-weight page micro framework for vscode webview. Vs Code Extension developers can use it to finish pages for webviews in their extensions quickly.
@@ -148,11 +150,11 @@ To create or show a WebviewPanel, you can invoke function createOrShowPage like 
 
 ```typescript
 createOrShowPage(
-  "name",
-  "ext.home",
-  "Sample Page",
-  "pages",
-  "home.html",
+  'name',
+  'ext.home',
+  'Sample Page',
+  'pages',
+  'home.html',
   context,
   messageMappings
 );
