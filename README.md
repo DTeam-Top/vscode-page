@@ -222,6 +222,10 @@ I can not find an easy way to fix it, only find the following steps. If you have
 - "npm pack" in vscode-page project.
 - "npm install local-package" in your application.
 
+## Resources
+
+- [使用 vscode-page 简化 vscode 插件的 Webview 开发](https://blog.dteam.top/posts/2020-03/simplify-vscode-webview-development-with-vscode-page.html)
+
 ## Known Issues
 
 Please visit [issues](https://github.com/DTeam-Top/vscode-page/issues) page to submit new issues or check known issues.
