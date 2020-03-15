@@ -222,6 +222,7 @@ I can not find an easy way to fix it, only find the following steps. If you have
 ## Resources
 
 - [使用 vscode-page 简化 vscode 插件的 Webview 开发](https://blog.dteam.top/posts/2020-03/simplify-vscode-webview-development-with-vscode-page.html)
+- [Simplifying VS Code Webview Development with vscode-page](https://dev.to/foxgem/simplifying-vs-code-webview-development-with-vscode-page-13c3)
 
 ## Known Issues
 
