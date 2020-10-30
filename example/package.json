@@ -1,8 +1,14 @@
 {
   "name": "page-example",
   "displayName": "page-example",
+  "author": "dteam",
+  "publisher": "dteam",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DTeam-Top/vscode-page.git"
+  },
   "description": "this is a vscode-page example.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.42.0"
   },
@@ -42,5 +48,8 @@
     "typescript": "^3.7.5",
     "vscode-test": "^1.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "handlebars": "^4.7.6",
+    "vscode-page": "0.0.1"
+  }
 }
